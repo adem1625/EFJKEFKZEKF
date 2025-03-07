@@ -2,17 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Stage 5: The Royal Quiz</title>
-  <!-- Google Fonts for a classical, elegant look -->
+  <title>Aladdin’s Rise to Wealth and Power </title>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    /* Animated gradient background with violet and blue hues (same as Stage 4) */
+    /*5*/
+    /* Main gradient animation */
     @keyframes gradientAnimation {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-    
+
     body {
       margin: 0;
       padding: 0;
@@ -21,173 +21,218 @@
       background-size: 400% 400%;
       animation: gradientAnimation 15s ease infinite;
       color: #f5f5f5;
-      position: relative;
-      text-align: center;
       min-height: 100vh;
       overflow-y: auto;
     }
-    
-    /* Container styling matching Stage 4 */
+
+    /* Container styling */
     .container {
-      background: rgba(0, 0, 50, 0.8);
+      background: rgba(0, 0, 50, 0.85);
       padding: 40px 50px;
       border-radius: 10px;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.8);
       max-width: 600px;
       width: 90%;
       border: 2px solid #9370DB;
-      text-align: center;
-      position: relative;
-      z-index: 2;
       margin: 40px auto;
       animation: fadeInUp 1s ease-out forwards;
       opacity: 0;
     }
-    
+
     @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    
-    h1 {
-      font-size: 2.4em;
-      margin-bottom: 20px;
-      color: #e6e6fa; /* lavender */
+
+    /* Riddle styling */
+    .riddle-box {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 25px;
+      border-radius: 8px;
+      margin: 30px 0;
+      border: 1px solid #ffd700;
     }
-    
-    p {
-      font-size: 1.2em;
-      margin-bottom: 20px;
-      line-height: 1.5;
+
+    .riddle-text {
+      font-size: 1.4em;
+      line-height: 1.6;
+      color: #ffd700;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+      margin: 0;
     }
-    
-    form {
-      margin-top: 20px;
-      text-align: left;
+
+    /* Code input styling */
+    .code-container {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 30px 0;
     }
-    
-    label {
-      display: block;
-      margin-bottom: 10px;
-      font-weight: bold;
-    }
-    
-    input[type="text"] {
-      width: 100%;
-      padding: 10px;
-      font-size: 1em;
+
+    .code-input {
+      width: 60px;
+      height: 60px;
+      font-size: 2em;
+      text-align: center;
       border: 2px solid #ffd700;
-      border-radius: 5px;
-      margin-bottom: 20px;
+      border-radius: 8px;
       background: rgba(255, 255, 255, 0.95);
       color: #333;
+      transition: all 0.3s ease;
     }
-    
-    input[type="text"]:focus {
-      border-color: #ffb6c1;
+
+    .code-input:focus {
+      border-color: #8A2BE2;
       outline: none;
+      box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
     }
-    
+
+    /* Genie animation (from Stage 3) */
+    #genieAnimation {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1000;
+      text-align: center;
+    }
+
+    #genieAnimation img {
+      width: 300px;
+      animation: genieFadeIn 1s ease-out forwards;
+    }
+
+    #genieMessage {
+      margin-top: 20px;
+      font-size: 1.4em;
+      background: rgba(0, 0, 50, 0.9);
+      padding: 20px;
+      border-radius: 10px;
+      border: 2px solid #ffd700;
+      box-shadow: 0 0 20px rgba(255,215,0,0.5);
+    }
+
+    @keyframes genieFadeIn {
+      from { opacity: 0; transform: scale(0.5) translateY(50px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* Button styling */
     button {
-      padding: 12px 20px;
-      font-size: 1em;
+      padding: 15px 30px;
+      font-size: 1.2em;
       background-color: #9370DB;
       color: #fff;
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      transition: background-color 0.3s, transform 0.3s;
+      transition: all 0.3s ease;
       width: 100%;
+      letter-spacing: 1px;
     }
-    
+
     button:hover {
       background-color: #8A2BE2;
       transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
     }
-    
+
+    /* Result messages */
     #result {
       margin-top: 20px;
-      font-size: 1.4em;
-      font-weight: bold;
-      text-align: center;
+      font-size: 1.2em;
     }
-    
+
     .error {
       color: #ff4d4d;
-      background-color: rgba(255, 0, 0, 0.3);
-      padding: 10px;
-      border-radius: 5px;
-      text-align: center;
+      background: rgba(255, 0, 0, 0.15);
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #ff4d4d;
     }
-    
+
     .success {
-      color: #00ff00;
-      background-color: rgba(0, 128, 0, 0.3);
-      padding: 10px;
-      border-radius: 5px;
-      text-align: center;
-    }
-    
-    a {
-      color: #e6e6fa;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    
-    a:hover {
-      text-decoration: underline;
+      color: #90EE90;
+      background: rgba(0, 255, 0, 0.15);
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #90EE90;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Stage 5: The Royal Quiz</h1>
-    <p>Answer the following questions to form your Royal Decree.</p>
-    <form id="quizForm">
-      <label for="q1">1. Literature: What is the two-word title of the classic collection that includes Aladdin’s tale?</label>
-      <input type="text" id="q1" placeholder="Your answer here">
-      
-      <label for="q2">2. History: Which region is most commonly associated with the origin of Aladdin’s tale?</label>
-      <input type="text" id="q2" placeholder="Your answer here">
-      
-      <label for="q3">3. Logic/Observation: How many wishes does the genie grant in the traditional version of the tale?</label>
-      <input type="text" id="q3" placeholder="Your answer here">
-      
-      <button type="submit">Submit Answers</button>
-    </form>
+    <h1>Stage 5: The Genie's Enigma</h1>
+    
+    <div class="riddle-box">
+      <p class="riddle-text">
+        Where hungry wishes are first fulfilled,<br>
+        Then where minds with stories are filled,<br>
+        Finally, where voices dare to speak —<br>
+        Find the treasure the Genie seeks
+      </p>
+    </div>
+
+    <div class="code-container">
+      <input type="number" class="code-input" id="code1" maxlength="1">
+      <input type="number" class="code-input" id="code2" maxlength="1">
+      <input type="number" class="code-input" id="code3" maxlength="1">
+    </div>
+
+    <button type="button" onclick="validateCode()">Unlock the Secret</button>
+    
     <div id="result"></div>
   </div>
-  
+
+  <!-- Genie Animation -->
+  <div id="genieAnimation">
+    <img src="./gen.png" alt="Magic Genie">
+    <div id="genieMessage">
+      <p>By the sands of time! The path is revealed!</p>
+      <p>Your wisdom has unlocked the ancient secret!</p>
+      <a href="next-stage.html" style="color: #ffd700; text-decoration: none; font-weight: bold;">
+        Proceed to the Treasure →
+      </a>
+    </div>
+  </div>
+
   <script>
-    document.getElementById("quizForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      
-      // Retrieve and normalize answers
-      let answer1 = document.getElementById("q1").value.trim().toLowerCase();
-      let answer2 = document.getElementById("q2").value.trim().toLowerCase();
-      let answer3 = document.getElementById("q3").value.trim();
-      
-      // Expected answers
-      const expected1 = "arabian nights";
-      const expected2 = "middle east";
-      const expected3 = "3";
-      
-      const resultDiv = document.getElementById("result");
-      
-      // Check answers
-      if (answer1 === expected1 && answer2 === expected2 && answer3 === expected3) {
-        // Form the Royal Decree "AM3" (A from Arabian Nights, M from Middle East, and 3)
-        const royalDecree = "AM3";
-        resultDiv.innerHTML = '<div class="success">Correct! Your Royal Decree is: <strong>' + royalDecree + '</strong><br>This decree is very important for the next rounds. Keep it safe!</div>';
+    function validateCode() {
+      const code = [
+        document.getElementById('code1').value,
+        document.getElementById('code2').value,
+        document.getElementById('code3').value
+      ].join('');
+
+      const resultDiv = document.getElementById('result');
+      const genie = document.getElementById('genieAnimation');
+
+      // Clear previous messages
+      resultDiv.innerHTML = '';
+
+      if (code === '313') { // Example correct code
+        genie.style.display = 'block';
       } else {
-        resultDiv.innerHTML = '<div class="error">One or more answers are incorrect. Please review your responses and try again.</div>';
+        genie.style.display = 'none';
+        resultDiv.innerHTML = `
+          <div class="error">
+            ⚠️ The stones rumble... Incorrect combination!
+          </div>
+        `;
       }
+    }
+
+    // Input validation and auto-focus
+    document.querySelectorAll('.code-input').forEach((input, index, inputs) => {
+      input.addEventListener('input', (e) => {
+        if (input.value.length > 1) {
+          input.value = input.value.slice(0, 1);
+        }
+        if (input.value && index < inputs.length - 1) {
+          inputs[index + 1].focus();
+        }
+      });
     });
   </script>
 </body>
